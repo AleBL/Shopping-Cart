@@ -9,6 +9,13 @@ class App extends Component {
     this.state = { products: [], cartItems:[] };
   }
 
+  componentWillMount() {
+    fetch('http://localhost:8000/products').then(res => res.json())
+      .then(data => this.setState({
+        products: data
+      }));
+  }
+
   removeFromCart = (e, product) => {
     this.setState(state => {
       const cartItems = state.cartItems.filter(a => a.id !== product.id);
@@ -61,4 +68,3 @@ class App extends Component {
 }
 
 export default App;
-
