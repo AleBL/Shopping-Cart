@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import './css/App.css';
-import Products from './components/Products.js'
-import Cart from './components/Cart.js'
+import React, { Component } from "react";
+import "./css/App.css";
+import Products from "./components/Products.js"
+import Cart from "./components/Cart.js"
 
 class App extends Component {
   constructor(props) {
@@ -10,7 +10,7 @@ class App extends Component {
   }
 
   componentWillMount() {
-    fetch('http://localhost:8000/products').then(res => res.json())
+    fetch("http://localhost:8000/products").then(res => res.json())
       .then(data => this.setState({
         products: data
       }));

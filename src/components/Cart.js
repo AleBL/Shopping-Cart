@@ -23,7 +23,7 @@ export default class Cart extends Component {
               </ul>
 
               <b>Total: { util.formatCurrency(cartItems.reduce((a, c) => (a + c.price_per_kg * c.count), 0)) }</b>
-              <button onClick={ () => alert('Todo: Implement checkout page.') } className="btn btn-primary"> Purchase </button>
+              <button onClick={ () => alert("Todo: Implement checkout page.") } className="btn btn-primary"> Purchase </button>
             </div>
           }
       </div>
