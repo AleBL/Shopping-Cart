@@ -6,7 +6,7 @@ import Cart from "./components/Cart.js"
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { products: [], cartItems:[] };
+    this.state = { products: [], cartItems: [] };
   }
 
   componentWillMount() {
@@ -18,7 +18,25 @@ class App extends Component {
 
   removeFromCart = (e, product) => {
     this.setState(state => {
-      const cartItems = state.cartItems.filter(a => a.id !== product.id);
+      let cartItems = state.cartItems;
+
+      cartItems.forEach(item => {
+        if (item.id === product.id) {
+          item.count -= 1;
+
+          if(item.count <= 0){
+            cartItems = cartItems.filter(item => item.id !== product.id)
+          }
+        }
+      });
+
+      return { cartItems: cartItems };
+    });
+  }
+
+  removeAllFromCart = (e, product) => {
+    this.setState(state => {
+      const cartItems = state.cartItems.filter(item => item.id !== product.id);
       return { cartItems: cartItems };
     })
   }
@@ -28,9 +46,9 @@ class App extends Component {
       const cartItems = state.cartItems;
 
       let found = false;
-      cartItems.forEach(cp => {
-        if (cp.id === product.id) {
-          cp.count += 1;
+      cartItems.forEach(item => {
+        if (item.id === product.id) {
+          item.count += 1;
           found = true;
         }
       });
@@ -39,8 +57,6 @@ class App extends Component {
         return { cartItems: cartItems };
       }
       cartItems.push({ ...product, count: 1 });
-      
-      console.log(cartItems)
 
       return { cartItems: cartItems };
     });
@@ -49,7 +65,7 @@ class App extends Component {
   render(){
     return (
       <div>
-        <h1>Shopping Cart + {this.state.cartItems.length} + { this.state.products.length }</h1>
+        <h1>Shopping Cart</h1>
         <hr />
         <div>
           <div className="App-header">
@@ -59,7 +75,7 @@ class App extends Component {
           </div>
 
           <div className="App-header">
-            <Cart cartItems={this.state.cartItems} removeFromCart={this.removeFromCart} />
+            <Cart cartItems={this.state.cartItems} removeAllFromCart={this.removeAllFromCart} />
           </div>
         </div>
       </div>

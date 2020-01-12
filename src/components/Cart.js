@@ -15,7 +15,7 @@ export default class Cart extends Component {
                     <li key={ item.id }>
                       <b>{ item.name }</b>
                       <button style={ { float: "right" } } className="btn btn-danger"
-                          onClick={ (e) => this.props.removeFromCart(e, item) }>X</button>
+                          onClick={ (e) => this.props.removeAllFromCart(e, item) }>X</button>
                       <br />
                       { item.count } X { util.formatCurrency(item.price_per_kg) }
                     </li>))
