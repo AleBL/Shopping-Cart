@@ -17,5 +17,24 @@
       "name": "Orange",
       "price_per_kg": 30.0
     }
+  ],
+
+  "coupons":[
+    {
+      "code": "A",
+      "type": "PERCENTUAL",
+      "value": 30
+    },
+
+    {
+      "code": "FOO",
+      "type": "FIXED",
+      "value": 100
+    },
+
+    {
+      "code": "C",
+      "type": "FREE-SHIPPING"
+    }
   ]
 }

@@ -6,13 +6,18 @@ import Cart from "./components/Cart.js"
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { products: [], cartItems: [] };
+    this.state = { products: [], cartItems: [], coupons: [] };
   }
 
   componentWillMount() {
     fetch("http://localhost:8000/products").then(res => res.json())
       .then(data => this.setState({
         products: data
+      }));
+
+    fetch("http://localhost:8000/coupons").then(res => res.json())
+      .then(data => this.setState({
+        coupons: data
       }));
   }
 
