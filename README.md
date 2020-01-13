@@ -23,10 +23,19 @@ C: free shipping coupon with minimum value of R$300,50
 
 # Setup
 
+### Install Dependencies
+npm install -g json-server
+yarn install
+
 ### `yarn test`
 To run the test suite
 
 # Run the server
+### 'json-server public/db.json --port 8000'
+Start the fake API-REST
+Open [http://localhost:8000/products](http://localhost:8000/products) to view products it in the browser.
+Open [http://localhost:8000/coupons](http://localhost:8000/coupons) to view coupons it in the browser.
+
 ### `yarn start`
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
