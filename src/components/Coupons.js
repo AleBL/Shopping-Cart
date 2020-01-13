@@ -7,30 +7,16 @@ export default class Coupons extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {coupons: [], couponsApplied: [], couponCode: ""};
+    this.state = { couponsApplied: [] };
   }
-
-  changeEvent = (e) => {
-    this.state.couponCode = e.target.value;
-  }
-
-  addCoupon = (couponList) => {
-    couponList.forEach(coupon => {
-      if (coupon.code === this.state.couponCode) {
-        this.state.couponsApplied.push({ ...coupon });
-      }
-    });
-
-    this.forceUpdate();
-  };
 
   render() {
     const ApplyCoupons = (
       <div>
         <input placeholder="Coupon Code"
-        onChange={ (e) => this.changeEvent(e, this.state.couponCode) } />
+        onChange={ (e) => this.props.changeEvent(e, this.state.couponCode) } />
 
-        <button className="btn btn-success" type="submit" onClick={ (e) => this.addCoupon(this.props.coupons) }>
+        <button className="btn btn-success" type="submit" onClick={ (e) => this.props.addCoupon() }>
           Apply
         </button>
       </div>
@@ -41,7 +27,7 @@ export default class Coupons extends Component {
         { ApplyCoupons }
 
         <div className="App-header">
-          <CouponsApplied couponsApplied={ this.state.couponsApplied } />
+          <CouponsApplied couponsApplied={ this.props.couponsApplied } />
         </div>
       </div>
     )
