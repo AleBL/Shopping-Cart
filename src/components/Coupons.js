@@ -1,4 +1,4 @@
-import React, { Component } from "./node_modules/react"
+import React, { Component } from "react"
 import util from "../util"
 import "../css/App.css";
 import CouponsApplied from "./CouponsApplied.js"
