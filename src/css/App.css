@@ -1,10 +1,5 @@
 .App {
-  text-align: center;
-}
-
-.App-header {
-  background-color: #c4d1eb;
-  min-height: 30vh;
+  background-color: rgb(157, 181, 229);
   display: flex;
   justify-content: center;
   font-size: calc(10px + 2vmin);
@@ -14,4 +9,28 @@
 .Products{
   width: 60px;
   height: 60px;
+}
+
+.btn-success {
+  background-color: rgb(0, 183, 70);
+  color: rgb(255, 255, 255);
+  padding: 7px 15px;
+  text-align: center;
+  font-size: 12px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12%;
+  border: 2px solid rgb(76, 175, 80);
+}
+
+.add-product {
+  min-height: 30vh;
+}
+
+.coupon {
+  min-height: 10vh;
+}
+
+.total {
+  min-height: 20vh;
 }
