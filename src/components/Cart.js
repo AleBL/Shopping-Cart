@@ -53,6 +53,11 @@ export default class Cart extends Component {
     const discount_value = this.calculatorDiscount(total_value, shipping_value);
 
     let total_value_purchase = (total_value + (shipping_value - discount_value));
+
+    if(total_value_purchase < 0){
+      total_value_purchase = 0;
+    }
+
     let data = [shipping_value, 
                 discount_value, 
                 total_value_purchase]
