@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import "./css/App.css";
 import Products from "./components/Products.js"
+import Coupons from "./components/Coupons.js"
 import Cart from "./components/Cart.js"
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { products: [], cartItems: [], coupons: [] };
+    this.state = { products: [], cartItems: [], coupons: [], couponsApplied: [] };
   }
 
   componentWillMount() {
@@ -73,15 +74,19 @@ class App extends Component {
         <h1>Shopping Cart</h1>
         <hr />
         <div>
-          <div className="App-header">
-            <Products products={this.state.products} 
-              addToCart={this.addToCart}
-              removeFromCart={this.removeFromCart}/>
-          </div>
+          <div className="App add-product">
+            <Products products={ this.state.products } 
+              addToCart={ this.addToCart }
+              removeFromCart={ this.removeFromCart } />
+            </div>
 
-          <div className="App-header">
-            <Cart cartItems={this.state.cartItems} removeAllFromCart={this.removeAllFromCart} />
-          </div>
+            <div className="App coupon">
+              <Coupons coupons={ this.state.coupons } />
+            </div>
+
+            <div className="App total">
+              <Cart cartItems={ this.state.cartItems } removeAllFromCart={ this.removeAllFromCart } />
+            </div>
         </div>
       </div>
     );
