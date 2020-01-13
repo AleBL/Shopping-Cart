@@ -73,11 +73,10 @@ export default class App extends Component {
   }
 
   addCoupon = () => {
-    this.state.coupons.forEach(coupon => {
-      if (coupon.code === this.state.couponCode) {
-        this.state.couponsApplied.push({ ...coupon });
-      }
-    });
+    let couponFound = this.state.coupons.filter(coupon => (coupon.code == this.state.couponCode));
+    if(couponFound.length > 0){
+      this.state.couponsApplied.push({ ...couponFound[0] });
+    }
 
     this.forceUpdate();
   };
