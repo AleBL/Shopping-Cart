@@ -12,7 +12,7 @@ export default class Cart extends Component {
               <ul>
                 {
                   cartItems.map(item => (
-                    <li key={ item.id }>
+                    <li key={ item.name }>
                       <b>{ item.name }</b>
                       <button style={ { float: "right" } } className="btn btn-danger"
                           onClick={ (e) => this.props.removeAllFromCart(e, item) }>X</button>
@@ -23,7 +23,10 @@ export default class Cart extends Component {
               </ul>
 
               <b>Total: { util.formatCurrency(cartItems.reduce((a, c) => (a + c.price_per_kg * c.count), 0)) }</b>
-              <button onClick={ () => alert("Todo: Implement checkout page.") } className="btn btn-primary"> Purchase </button>
+              <button className="btn btn-success" 
+                onClick={ () => alert("Your Purchase was successfully sent") }>
+                Purchase 
+              </button>
             </div>
           }
       </div>
