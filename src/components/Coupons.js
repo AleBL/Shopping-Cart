@@ -27,7 +27,8 @@ export default class Coupons extends Component {
         { ApplyCoupons }
 
         <div className="App-header">
-          <CouponsApplied couponsApplied={ this.props.couponsApplied } />
+          <CouponsApplied couponsApplied={ this.props.couponsApplied } 
+            removeCoupon={ this.props.removeCoupon }/>
         </div>
       </div>
     )
