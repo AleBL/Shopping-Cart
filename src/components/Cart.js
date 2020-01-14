@@ -2,72 +2,72 @@ import React, { Component } from "react"
 import util from "../util"
 
 export default class Cart extends Component {
+  calculatorShipping = (totalValue, totalKg) => {
+    let x = 0;
 
-  
-  calculatorShipping = (total_value, total_kg) => {
-    if(total_kg <= 0 || total_value >= 400){
+    if(totalKg <= 0 || totalValue >= 400){
       return 0;
     }
 
-    if(total_kg > 10){
-      return 30 + (Math.floor((total_kg - 10) / 5) * 7) ;
+    if(totalKg > 10){
+      return 30 + (Math.floor((totalKg - 10) / 5) * 7) ;
     }
 
     return 30;
   };
 
-  calculatorDiscount = (total_value, shipping_value) => {
-    let price_discount = 0;
+  calculatorDiscount = (totalValue, shippingValue) => {
+    let priceDiscount = 0;
     this.props.couponsApplied.forEach(coupon => {
-      if(coupon.activation_value <= total_value){
+      if(coupon.activationValue <= totalValue){
         switch(coupon.type) {
           case "PERCENTUAL":
-            price_discount += (total_value * coupon.value);
+            priceDiscount += (totalValue * coupon.value);
             break;
           case "FIXED":
-            price_discount += coupon.value;
+            priceDiscount += coupon.value;
             break;
           case "FREE-SHIPPING":
-            price_discount += shipping_value;
+            priceDiscount += shippingValue;
             break;
         }
       }
 
     });
     
-    return price_discount;
+    return priceDiscount;
   };
 
   calculatorCartValue = () => {
-    let total_value = 0;
-    let total_kg = 0;
+    let totalValue = 0;
+    let totalKg = 0;
 
     try {
-      total_value = this.props.cartItems.reduce((a, c) => (a + c.price_per_kg * c.count), 0);
-      total_kg = this.props.cartItems.reduce((a, c) => (a + c.count), 0);
+      totalValue = this.props.cartItems.reduce((a, c) => (a + c.price_per_kg * c.count), 0);
+      totalKg = this.props.cartItems.reduce((a, c) => (a + c.count), 0);
     } catch (e) {
 
     }
 
-    const shipping_value = this.calculatorShipping(total_value, total_kg);
-    const discount_value = this.calculatorDiscount(total_value, shipping_value);
+    const shippingValue = this.calculatorShipping(totalValue, totalKg);
+    const discountValue = this.calculatorDiscount(totalValue, shippingValue);
 
-    let total_value_purchase = (total_value + (shipping_value - discount_value));
+    let totalValuePurchase = (totalValue + (shippingValue - discountValue));
 
-    if(total_value_purchase < 0){
-      total_value_purchase = 0;
+    if(totalValuePurchase < 0){
+      totalValuePurchase = 0;
     }
 
-    let data = [shipping_value, 
-                discount_value, 
-                total_value_purchase]
+    let data = [shippingValue, 
+                discountValue, 
+                totalValuePurchase]
     return data;
   };
 
   render() {
     const data = this.calculatorCartValue();
     return (
-      <div className="alert alert-info">
+      <div>
           {
             <div>
               <ul>
