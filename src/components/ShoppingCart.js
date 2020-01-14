@@ -72,8 +72,8 @@ export default class App extends Component {
   }
 
   addCoupon = () => {
-    const couponFound = this.state.coupons.filter(coupon => (coupon.code == this.state.couponCode));
-    const couponAppliedFound = this.state.couponsApplied.filter(coupon => (coupon.code == this.state.couponCode));
+    const couponFound = this.state.coupons.filter(coupon => (coupon.code === this.state.couponCode));
+    const couponAppliedFound = this.state.couponsApplied.filter(coupon => (coupon.code === this.state.couponCode));
 
     if(couponFound.length > 0 && couponAppliedFound.length <= 0){
       this.state.couponsApplied.push({ ...couponFound[0] });
@@ -83,7 +83,7 @@ export default class App extends Component {
   };
 
   removeCoupon = (coupon) => {
-    const couponsAppliedFiltered = this.state.couponsApplied.filter(couponApplied => (couponApplied.code != coupon.code));
+    const couponsAppliedFiltered = this.state.couponsApplied.filter(couponApplied => (couponApplied.code !== coupon.code));
     
     this.setState(state => {
       return { couponsApplied: couponsAppliedFiltered }
