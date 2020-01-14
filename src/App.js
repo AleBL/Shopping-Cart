@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./css/App.css";
 import ShoppingCart from "./components/ShoppingCart";
 
 class App extends Component {

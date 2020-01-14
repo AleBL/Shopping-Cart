@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import "../css/App.css";
 import Products from "./Products.js"
 import Coupons from "./Coupons.js"
 import Cart from "./Cart.js"
@@ -96,20 +95,20 @@ export default class App extends Component {
   render(){
     return (
       <div>
-        <div className="App add-product">
+        <div className="App add-product-size">
           <Products products={ this.state.products } 
             addToCart={ this.addToCart }
             removeFromCart={ this.removeFromCart } />
           </div>
 
-          <div className="App coupon">
+          <div className="App coupon-size">
             <Coupons changeEvent={ this.changeEvent }
               addCoupon={ this.addCoupon } 
               removeCoupon={ this.removeCoupon }
               couponsApplied={ this.state.couponsApplied }/>
           </div>
 
-          <div className="App total">
+          <div className="App total-size">
             <Cart cartItems={ this.state.cartItems } 
               couponsApplied={ this.state.couponsApplied }
               removeAllFromCart={ this.removeAllFromCart } />

@@ -6,31 +6,49 @@
   color: rgb(255, 255, 255);
 }
 
-.Products{
+.Products-size {
   width: 60px;
   height: 60px;
 }
 
-.btn-success {
-  background-color: rgb(0, 183, 70);
-  color: rgb(255, 255, 255);
+.btn {
   padding: 7px 15px;
   text-align: center;
   font-size: 12px;
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 12%;
-  border: 2px solid rgb(76, 175, 80);
+  color: rgb(255, 255, 255);
 }
 
-.add-product {
+.btn-small {
+  border-radius: 15%;
+  color: rgb(255, 255, 255);
+}
+
+.btn-success {
+  background-color: rgb(0, 183, 70);
+  border: 2px solid rgb(65, 175, 69);
+}
+
+.btn-danger {
+  background-color: rgb(244, 67, 54);
+  border: 2px solid rgb(209, 61, 41);
+}
+
+.btn-primary {
+  background-color: rgb(45, 110, 207);
+  border: 2px solid rgb(64, 76, 243);
+}
+
+.add-product-size {
   min-height: 30vh;
 }
 
-.coupon {
+.coupon-size {
   min-height: 10vh;
 }
 
-.total {
+.total-size {
   min-height: 20vh;
 }

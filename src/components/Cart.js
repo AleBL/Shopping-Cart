@@ -5,7 +5,7 @@ export default class Cart extends Component {
 
   
   calculatorShipping = (total_value, total_kg) => {
-    if(total_kg <=0 || total_value >= 400){
+    if(total_kg <= 0 || total_value >= 400){
       return 0;
     }
 
@@ -75,7 +75,7 @@ export default class Cart extends Component {
                   this.props.cartItems.map(item => (
                     <li key={ item.name }>
                       <b>{ item.name }</b>
-                      <button style={ { float: "right" } } className="btn btn-danger"
+                      <button style={ { float: "right" } } className="btn-small btn-danger"
                           onClick={ (e) => this.props.removeAllFromCart(e, item) }>X</button>
                       <br />
                       { item.count } X { util.formatCurrency(item.price_per_kg) }
