@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-import util from "../util"
 import CouponsApplied from "./CouponsApplied.js"
 
 export default class Coupons extends Component {
