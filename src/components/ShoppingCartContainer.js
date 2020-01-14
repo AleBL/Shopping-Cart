@@ -7,7 +7,7 @@ export default class App extends Component {
     this.state = { products: [], cartItems: [], coupons: [], couponsApplied: [], couponCode: "" };
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     fetch("http://localhost:8000/products").then(res => res.json())
       .then(data => this.setState({
         products: data

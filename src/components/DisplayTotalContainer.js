@@ -33,6 +33,8 @@ export default class CartContainer extends Component {
           case "FREE-SHIPPING":
             priceDiscount += shippingValue;
             break;
+          default:
+            break;
         }
       }
     });
