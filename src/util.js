@@ -1,5 +1,11 @@
+import consts from "./constants.js"
+
 export default {
-  formatCurrency: function (num) {
+  formatCurrencyBRL: function (num) {
       return num.toLocaleString("pt-BR", { style:"currency", currency:"BRL" });
+  },
+
+  percentualCalc: function (num) {
+    return num * consts.percentual;
   }
 }
