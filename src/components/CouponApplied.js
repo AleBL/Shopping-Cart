@@ -1,14 +1,14 @@
 import React, { Component } from "react"
 import util from "../util"
 
-export default class CouponsApplied extends Component {
+export default class CouponApplied extends Component {
   render() {
     const appliedCoupons = this.props.couponsApplied.map(coupon => (
       <div key={ coupon.code } >
         <p> 
           { coupon.code } {" : "}
-          { coupon.type === "PERCENTUAL" ? " - " + (coupon.value * 100) + " %" : "" }
-          { coupon.type === "FIXED" ? " - " + util.formatCurrency(coupon.value) : "" }
+          { coupon.type === "PERCENTUAL" ? " - " + util.percentualCalc(coupon.value) + " %" : "" }
+          { coupon.type === "FIXED" ? " - " + util.formatCurrencyBRL(coupon.value) : "" }
           { coupon.type === "FREE-SHIPPING" ? "FREE-SHIPPING" : "" }
 
           <button type="submit" className="btn-small btn-danger" 
