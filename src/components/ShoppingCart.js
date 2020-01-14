@@ -1,119 +1,34 @@
-import React, { Component } from 'react'
-import Products from "./Products.js"
-import Coupons from "./Coupons.js"
-import Cart from "./Cart.js"
+import React from "react"
+import Product from "./Product.js"
+import Coupon from "./Coupon.js"
+import DisplayProduct from "./DisplayProduct.js"
+import DisplayTotalContainer from "./DisplayTotalContainer.js"
 
-export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { products: [], cartItems: [], coupons: [], couponsApplied: [], couponCode: "" };
-  }
+export default (props) => {
+  return (
+    <div>
+      <div className="App add-product-size">
+        <Product products={ props.products } 
+          addToCart={ props.addToCart }
+          removeFromCart={ props.removeFromCart } />
+        </div>
 
-  componentWillMount() {
-    fetch("http://localhost:8000/products").then(res => res.json())
-      .then(data => this.setState({
-        products: data
-      }));
+        <div className="App coupon-size">
+          <Coupon changeEvent={ props.changeEvent }
+            addCoupon={ props.addCoupon } 
+            removeCoupon={ props.removeCoupon }
+            couponsApplied={ props.couponsApplied }/>
+        </div>
 
-    fetch("http://localhost:8000/coupons").then(res => res.json())
-      .then(data => this.setState({
-        coupons: data
-      }));
-  }
+        <div className="App total-size">
+          <DisplayProduct cartItems={ props.cartItems } 
+            removeAllFromCart={ props.removeAllFromCart } />
+        </div>
 
-  removeFromCart = (e, product) => {
-    this.setState(state => {
-      let cartItems = state.cartItems;
-
-      cartItems.forEach(item => {
-        if (item.id === product.id) {
-          item.count -= 1;
-
-          if(item.count <= 0){
-            cartItems = cartItems.filter(item => item.id !== product.id)
-          }
-        }
-      });
-
-      return { cartItems: cartItems };
-    });
-  }
-
-  removeAllFromCart = (e, product) => {
-    this.setState(state => {
-      const cartItems = state.cartItems.filter(item => item.id !== product.id);
-      return { cartItems: cartItems };
-    })
-  }
-
-  addToCart = (e, product) => {
-    this.setState(state => {
-      const cartItems = state.cartItems;
-
-      let found = false;
-      cartItems.forEach(item => {
-        if (item.id === product.id) {
-          item.count += 1;
-          found = true;
-        }
-      });
-
-      if(found){
-        return { cartItems: cartItems };
-      }
-      cartItems.push({ ...product, count: 1 });
-
-      return { cartItems: cartItems };
-    });
-  }
-
-  changeEvent = (e) => {
-    this.state.couponCode = e.target.value;
-  }
-
-  addCoupon = () => {
-    const couponFound = this.state.coupons.filter(coupon => (coupon.code === this.state.couponCode));
-    const couponAppliedFound = this.state.couponsApplied.filter(coupon => (coupon.code === this.state.couponCode));
-
-    if(couponFound.length > 0 && couponAppliedFound.length <= 0){
-      this.state.couponsApplied.push({ ...couponFound[0] });
-    }
-
-    this.forceUpdate();
-  };
-
-  removeCoupon = (coupon) => {
-    const couponsAppliedFiltered = this.state.couponsApplied.filter(couponApplied => (couponApplied.code !== coupon.code));
-    
-    this.setState(state => {
-      return { couponsApplied: couponsAppliedFiltered }
-    });
-
-    this.forceUpdate();
-  };
-
-  render(){
-    return (
-      <div>
-        <div className="App add-product-size">
-          <Products products={ this.state.products } 
-            addToCart={ this.addToCart }
-            removeFromCart={ this.removeFromCart } />
-          </div>
-
-          <div className="App coupon-size">
-            <Coupons changeEvent={ this.changeEvent }
-              addCoupon={ this.addCoupon } 
-              removeCoupon={ this.removeCoupon }
-              couponsApplied={ this.state.couponsApplied }/>
-          </div>
-
-          <div className="App total-size">
-            <Cart cartItems={ this.state.cartItems } 
-              couponsApplied={ this.state.couponsApplied }
-              removeAllFromCart={ this.removeAllFromCart } />
-            </div>
-      </div>
-    );
-  }
-}
+        <div className="App total-size">
+          <DisplayTotalContainer cartItems={ props.cartItems } 
+            couponsApplied={ props.couponsApplied } />
+        </div>
+    </div>
+  );
+};

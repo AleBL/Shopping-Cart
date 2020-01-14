@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./css/App.css";
-import ShoppingCart from "./components/ShoppingCart";
+import ShoppingCartContainer from "./components/ShoppingCartContainer.js";
 
 class App extends Component {
   render(){
@@ -9,7 +9,7 @@ class App extends Component {
         <h1>Shopping Cart</h1>
         <hr />
 
-        <ShoppingCart />
+        <ShoppingCartContainer />
       </div>
     );
   }
