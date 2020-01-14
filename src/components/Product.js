@@ -3,10 +3,11 @@ import util from "../util"
 
 export default class Product extends Component {
   render() {
+    
     const productItems = this.props.products.map(product => (
       <div key={ product.id }>
         <div>
-          <a href={ `#${ product.id }` } onClick={ (e)=>this.props.handleAddToCard }>
+          <a href={ `#${ product.id }` }>
             <img src={ `products/${ product.name }.png` } alt={ product.name } className="Products-size" />
           </a>
 
