@@ -31,7 +31,7 @@ yarn install
 To run the test suite
 
 # Run the server
-### 'json-server public/db.json --port 8000'
+### `json-server public/db.json --port 8000`
 Start the fake API-REST
 Open [http://localhost:8000/products](http://localhost:8000/products) to view products it in the browser.
 Open [http://localhost:8000/coupons](http://localhost:8000/coupons) to view coupons it in the browser.
