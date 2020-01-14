@@ -11,7 +11,7 @@ export default class CouponApplied extends Component {
           { coupon.type === "FIXED" ? " - " + util.formatCurrencyBRL(coupon.value) : "" }
           { coupon.type === "FREE-SHIPPING" ? "FREE-SHIPPING" : "" }
 
-          <button type="submit" className="btn-small btn-danger" 
+          <button type="submit" className="btn-small btn-danger"
             onClick={ (e) => this.props.removeCoupon(coupon) }>
             X
           </button>
