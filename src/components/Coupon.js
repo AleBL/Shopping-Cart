@@ -12,7 +12,7 @@ export default class Coupon extends Component {
     const applyCoupons = (
       <div>
         <input placeholder="Coupon Code"
-        onChange={ (e) => this.props.changeEvent(e, this.state.couponCode) } />
+          onChange={ (e) => this.props.changeEvent(e) } />
 
         <button className="btn btn-success" type="submit" onClick={ (e) => this.props.addCoupon() }>
           Apply
