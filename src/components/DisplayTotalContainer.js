@@ -22,7 +22,7 @@ export default class CartContainer extends Component {
   calculatorDiscount = (totalValue, shippingValue) => {
     let priceDiscount = 0;
     this.props.couponsApplied.forEach(coupon => {
-      if(coupon.activationValue <= totalValue) {
+      if(coupon.activation_value <= totalValue) {
         switch(coupon.type) {
           case "PERCENTUAL":
             priceDiscount += (totalValue * coupon.value);
@@ -35,7 +35,6 @@ export default class CartContainer extends Component {
             break;
         }
       }
-
     });
     
     return priceDiscount;
