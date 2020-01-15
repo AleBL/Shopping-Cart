@@ -1,27 +1,18 @@
-import React, { Component } from "react"
+import React from "react"
 import util from "../util"
 
-export default class Product extends Component {
-  render() {
-    
-    const productItems = this.props.products.map(product => (
-      <div key={ product.id }>
-        <div>
-          <a href={ `#${ product.id }` }>
-            <img src={ `products/${ product.name }.png` } alt={ product.name } className="Products-size" />
-          </a>
+const Product = (props) => {
+  return (
+    <div key={props.product.id}>
+      <a href={`#${props.product.id}`}>
+        <img src={`products/${props.product.name}.png`} alt={props.product.name} className="Products-size" />
+      </a>
 
-          <b>{ util.formatCurrencyBRL(product.price_per_kg) }</b>
-          <button className="btn-small btn-primary" onClick={ (e)=>this.props.addToCart(e, product) }> + </button>
-          <button className="btn-small btn-primary" onClick={ (e)=>this.props.removeFromCart(e, product) }> - </button>
-        </div>
-      </div>
-    ));
-
-    return (
-      <div>
-        { productItems }
-      </div>
-    )
-  }
+      <b>{util.formatCurrencyBRL(props.product.price_per_kg)}</b>
+      <button className="btn-small btn-primary" onClick={ (e)=> props.addToCart(props.product) }> + </button>
+      <button className="btn-small btn-primary" onClick={ (e)=> props.removeItem(props.product) }> - </button>
+    </div>
+  )
 }
+
+export default Product;
