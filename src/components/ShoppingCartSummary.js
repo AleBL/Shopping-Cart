@@ -61,7 +61,7 @@ const ShoppingCartSummary = (props) => {
   const totalValueProducts = totalValue(props.products);
   const totalWeightProducts = totalWeight(props.products);
   const shippingValuePurchase = shippingValue(totalValueProducts, totalWeightProducts);
-  const totalDiscountValue = discountValue(props.coupons, totalValueProducts, totalWeightProducts);
+  const totalDiscountValue = discountValue(props.coupons, totalValueProducts, shippingValuePurchase);
 
   const total = totalValueProducts + shippingValuePurchase - totalDiscountValue;
   const purchaseValue = total > minimumPurchaseValue ? total : minimumPurchaseValue;
