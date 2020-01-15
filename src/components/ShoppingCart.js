@@ -1,34 +1,33 @@
-import React from "react"
-import Product from "./Product.js"
-import Coupon from "./Coupon.js"
-import DisplayProduct from "./DisplayProduct.js"
-import DisplayTotalContainer from "./DisplayTotalContainer.js"
+import React, { Fragment } from "react"
+import ProductList from "./ProductList"
+import CouponContainer from "./CouponContainer"
+import SelectedProductsList from "./SelectedProductsList"
+import ShoppingCartSummary from "./ShoppingCartSummary"
 
-export default (props) => {
+const ShoppingCart = (props) => {
   return (
-    <div>
-      <div className="App add-product-size">
-        <Product products={ props.products } 
-          addToCart={ props.addToCart }
-          removeFromCart={ props.removeFromCart } />
-        </div>
-
-        <div className="App coupon-size">
-          <Coupon changeEvent={ props.changeEvent }
-            addCoupon={ props.addCoupon } 
-            removeCoupon={ props.removeCoupon }
-            couponsApplied={ props.couponsApplied }/>
-        </div>
-
-        <div className="App total-size">
-          <DisplayProduct cartItems={ props.cartItems } 
-            removeAllFromCart={ props.removeAllFromCart } />
-        </div>
-
-        <div className="App total-size">
-          <DisplayTotalContainer cartItems={ props.cartItems } 
-            couponsApplied={ props.couponsApplied } />
-        </div>
-    </div>
+    <Fragment>
+      <ProductList
+        addToCart={props.addToCart}
+        products={props.products}
+        removeItem={props.removeItem}
+      />
+      <CouponContainer
+        changeCoupon={props.changeCoupon}
+        addCoupon={props.addCoupon}
+        removeCoupon={props.removeCoupon}
+        couponsApplied={props.couponsApplied}
+      />
+      <SelectedProductsList
+        products={props.cartItems}
+        removeProduct={props.removeProduct}
+      />
+      <ShoppingCartSummary
+        products={props.cartItems}
+        coupons={props.couponsApplied}
+      />
+    </Fragment>
   );
-};
+}
+  
+export default ShoppingCart;

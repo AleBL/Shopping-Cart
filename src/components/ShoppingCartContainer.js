@@ -1,102 +1,106 @@
 import React, { Component } from "react"
 import ShoppingCart from "./ShoppingCart.js"
 
-export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { products: [], cartItems: [], coupons: [], couponsApplied: [], couponCode: "" };
+const baseApiPath = "http://localhost:8000/";
+const productsPath = "products";
+const couponsPath = "coupons";
+
+class ShoppingCartContainer extends Component {
+  state = {
+    products: [],
+    cartItems: [],
+    coupons: [],
+    couponsApplied: [],
+    couponCode: ""
   }
 
-  UNSAFE_componentWillMount() {
-    fetch("http://localhost:8000/products").then(res => res.json())
-      .then(data => this.setState({
-        products: data
-      }));
+  componentWillMount() {
+    Promise.all([
+      fetch(baseApiPath + productsPath),
+      fetch(baseApiPath + couponsPath)
+    ]).then((data) => {
+      let productsPromisse = data[0].json();
+      let couponsPromisse  = data[1].json();
 
-    fetch("http://localhost:8000/coupons").then(res => res.json())
-      .then(data => this.setState({
-        coupons: data
-      }));
-  }
-
-  removeFromCart = (e, product) => {
-    this.setState(state => {
-      let cartItems = state.cartItems;
-
-      cartItems.forEach(item => {
-        if (item.id === product.id) {
-          item.count -= 1;
-
-          if(item.count <= 0){
-            cartItems = this.removeFromArrayById(product, state.cartItems);
-          }
-        }
+      productsPromisse.then((data) => {
+        this.setState({ products: data });
       });
 
-      return { cartItems: cartItems };
+      couponsPromisse.then((data) => {
+        this.setState({ coupons: data });
+      });
     });
   }
 
-  removeAllFromCart = (e, product) => {
-    this.setState(state => {
-      const cartItems = this.removeFromArrayById(product, state.cartItems);
-      return { cartItems: cartItems };
-    })
-  }
-
-  removeFromArrayById = (element, array) => {
-    return array.filter(item => item.id !== element.id);
-  }
-
-  addToCart = (e, product) => {
-    this.setState(state => {
-      const cartItems = state.cartItems;
-
-      let found = false;
-      cartItems.forEach(item => {
-        if (item.id === product.id) {
-          item.count += 1;
-          found = true;
+  removeItem = (product) => {
+    const { cartItems } = Object.assign(this.state);
+    
+    cartItems.forEach((item) => {
+      if (item.id === product.id) {
+        if (item.count > 1) {
+          return item.count -= 1;
+        } else {
+          const itemIndex = cartItems.indexOf(item);
+          cartItems.splice(itemIndex, 1);
         }
-      });
-
-      if(found){
-        return { cartItems: cartItems };
       }
-      cartItems.push({ ...product, count: 1 });
-
-      return { cartItems: cartItems };
     });
+      
+    const newState = { ...this.state, cartItems: cartItems };
+      
+    this.setState(newState);
   }
 
-  changeEvent = (e) => {
-    const couponCode = e.target.value;
+  removeProduct = (product) => {
+      const { cartItems } = Object.assign(this.state);
+      const newCartItems = cartItems.filter(item => item.id !== product.id);
+      const newState = { ...this.state, cartItems: newCartItems };
 
-    this.setState(state => {
-      return { couponCode: couponCode };
-    });
+      this.setState(newState);
+  }
+
+  addToCart = (product) => {
+    const { cartItems } = Object.assign(this.state);
+    const [item, ...rest] = cartItems.filter(item => item.id === product.id);
+    
+    if (item) {
+      item.count += 1;
+    } else {
+      cartItems.push({...product, count: 1});
+    }
+    
+    const newState = { ...this.state, cartItems: cartItems };
+    this.setState(newState);
+  }
+
+  changeCoupon = (inputText) => {
+    const couponCode = inputText;
+    const newState = {...this.state, couponCode }
+
+    this.setState(newState);
   }
 
   addCoupon = () => {
-    this.setState(state => {
-      const couponFound = state.coupons.filter(coupon => (coupon.code === state.couponCode));
-      const couponAppliedFound = state.couponsApplied.filter(coupon => (coupon.code === state.couponCode));
-      const couponsApplied = state.couponsApplied;
-
-      if(couponFound.length > 0 && couponAppliedFound.length <= 0){
-        couponsApplied.push({ ...couponFound[0] });
-      }
-
-      return { couponsApplied: couponsApplied };
-    });
+    const { coupons, couponCode, couponsApplied } = this.state;
+    const [coupon, ...rest] = coupons.filter(coupon => coupon.code === couponCode);
+    const [coupomApplied] = couponsApplied.filter(coupon => coupon.code === couponCode);
+    
+    if (coupon && !coupomApplied){// && couponsApplied.length <= 0) {
+      couponsApplied.push({ ...coupon });
+    }
+    
+    const newState = { ...this.state, couponsApplied };
+    
+    this.setState(newState);
   };
 
   removeCoupon = (coupon) => {
-    this.setState((state) => {
-      const couponsApplied = state.couponsApplied.filter(couponApplied => (couponApplied.code !== coupon.code));
-
-      return { couponsApplied: couponsApplied }
-    });
+    const { couponsApplied } = this.state;
+    const newState = {
+      ...this.state,
+      couponsApplied: couponsApplied.filter(coupomApplied => coupomApplied.code !== coupon.code)
+    };
+    this.setState(newState);
   };
 
   render(){
@@ -104,13 +108,15 @@ export default class App extends Component {
       <ShoppingCart 
         products={ this.state.products }
         addToCart={ this.addToCart } 
-        removeFromCart={ this.removeFromCart } 
-        changeEvent={ this.changeEvent } 
+        removeItem={ this.removeItem } 
+        changeCoupon={ this.changeCoupon } 
         addCoupon={ this.addCoupon } 
         removeCoupon={ this.removeCoupon } 
         couponsApplied={ this.state.couponsApplied } 
         cartItems={ this.state.cartItems } 
-        removeAllFromCart={ this.removeAllFromCart } />
+        removeProduct={ this.removeProduct } />
     );
   }
 }
+
+export default ShoppingCartContainer;
