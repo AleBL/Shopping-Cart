@@ -9,17 +9,20 @@ import renderer from "react-test-renderer";
 afterEach(cleanup);
 
 describe("Product Component", () => {
-    const products = [];
+    const product = {
+      "id": 0,
+      "name": "Lemon",
+      "price_per_kg": 98.0};
 
     it("render without crashing", () => {
       const div = document.createElement("div");
     
       ReactDom.render(
-      <Product products={ products }/>, div);
+      <Product product={ product }/>, div);
     });
 
     it("matches snapshot", () => {
-      const tree = renderer.create(<Product products={ products }/>).toJSON();
+      const tree = renderer.create(<Product product={ product }/>).toJSON();
       expect(tree).toMatchSnapshot();
     });
 });
