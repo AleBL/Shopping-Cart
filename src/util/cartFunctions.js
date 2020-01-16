@@ -1,6 +1,6 @@
 import {
   minimumWeight,
-  freeShippingvalue,
+  freeShippingValue,
   maximumWeight,
   baseShippingValue,
   extraWeightForShipping,
@@ -9,7 +9,7 @@ import {
 } from "./constants.js"
 
 export const shippingValue = (totalValue, totalWeight) => {
-  const freeShipping = totalWeight <= minimumWeight || totalValue >= freeShippingvalue;
+  const freeShipping = totalWeight <= minimumWeight || totalValue >= freeShippingValue;
 
   if (freeShipping) {
     return 0;
