@@ -18,7 +18,7 @@ describe("Cart Functions", () => {
       expect(result).toEqual(30);
     });
 
-    it("Should add $7 to the shippring price for each 5kg above 10kg", () => {
+    it("Should add $7 to the shipping price for each 5kg above 10kg", () => {
       const totalValue = Math.floor(Math.random() * 10);
       const totalWeight = 25;
 
