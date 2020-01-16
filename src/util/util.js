@@ -1,4 +1,4 @@
-import consts from "./constants.js"
+import { percentual } from "./constants.js"
 
 export default {
   formatCurrencyBRL: function (num) {
@@ -6,6 +6,6 @@ export default {
   },
 
   percentualCalc: function (num) {
-    return num * consts.percentual;
+    return num * percentual;
   }
 }
