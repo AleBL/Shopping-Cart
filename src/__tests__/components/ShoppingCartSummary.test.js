@@ -1,9 +1,9 @@
-import React from 'react';
-import { shallow } from 'enzyme';
+import React from "react";
+import { shallow } from "enzyme";
 import ShoppingCartSummary from "../../components/ShoppingCartSummary"
 
-describe('ShoppingCartSummary Component', () => {
-  describe('render', () => {
+describe("ShoppingCartSummary Component", () => {
+  describe("render", () => {
 
     const products = [
       { id: 20, name: "Fruit 20", price_per_kg: 50, count: 60 },
@@ -15,14 +15,14 @@ describe('ShoppingCartSummary Component', () => {
                                     products={ products }
                                     coupons={ coupons }/>);
 
-    it('Should render the div of ShoppingCartSummary', () => {
-      const div = enzymeWrapper.find('div');
+    it("Should render the div of ShoppingCartSummary", () => {
+      const div = enzymeWrapper.find("div");
 
       expect(div).toHaveLength(4);
     });
 
-    it('Should render the button purchase of ShoppingCartSummary', () => {
-      const button = enzymeWrapper.find('button');
+    it("Should render the button purchase of ShoppingCartSummary", () => {
+      const button = enzymeWrapper.find("button");
 
       expect(button).toHaveLength(1);
     });

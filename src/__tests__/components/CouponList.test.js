@@ -1,5 +1,5 @@
-import React from 'react';
-import { shallow } from 'enzyme';
+import React from "react";
+import { shallow } from "enzyme";
 import CouponList from "../../components/CouponList"
 
 const setup = () => {
@@ -28,18 +28,18 @@ const setup = () => {
   };
 };
 
-describe('CouponList Element', () => {
-  describe('render', () => {
+describe("CouponList Element", () => {
+  describe("render", () => {
     const { enzymeWrapper } = setup();
 
-    it('Should render the p of CouponList', () => {
-      const p = enzymeWrapper.find('p');
+    it("Should render the p of CouponList", () => {
+      const p = enzymeWrapper.find("p");
 
       expect(p).toHaveLength(4);
     });
 
-    it('Should render the button remove coupon of CouponList', () => {
-      const button = enzymeWrapper.find('button');
+    it("Should render the button remove coupon of CouponList", () => {
+      const button = enzymeWrapper.find("button");
 
       expect(button).toHaveLength(3);
     });

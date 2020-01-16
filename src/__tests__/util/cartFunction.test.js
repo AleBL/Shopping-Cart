@@ -1,8 +1,8 @@
 import * as functions from "../../util/cartFunctions.js"
 
-describe('Cart Functions', () => {
-  describe('shippingValue', () => {
-    it('Should return 0 when price is above 400', () => {
+describe("Cart Functions", () => {
+  describe("shippingValue", () => {
+    it("Should return 0 when price is above 400", () => {
       const totalValue = Math.floor(Math.random() * 100) + 400;
       const totalWeight = Math.floor(Math.random() * 100);
 
@@ -10,7 +10,7 @@ describe('Cart Functions', () => {
       expect(result).toEqual(0);
     });
 
-    it('Should return 30 when kg is between 1-10', () => {
+    it("Should return 30 when kg is between 1-10", () => {
       const totalValue = Math.floor(Math.random() * 10);
       const totalWeight = Math.floor(Math.random() * 10) + 1;
 
@@ -18,7 +18,7 @@ describe('Cart Functions', () => {
       expect(result).toEqual(30);
     });
 
-    it('Should add $7 to the shippring price for each 5kg above 10kg', () => {
+    it("Should add $7 to the shippring price for each 5kg above 10kg", () => {
       const totalValue = Math.floor(Math.random() * 10);
       const totalWeight = 25;
 
@@ -27,8 +27,8 @@ describe('Cart Functions', () => {
     });
   });
 
-  describe('discountValue', () => {
-    it('Should return a discount based on value products', () => {
+  describe("discountValue", () => {
+    it("Should return a discount based on value products", () => {
       const coupons = [{
         "code": "A",
         "type": "PERCENTUAL",
@@ -42,7 +42,7 @@ describe('Cart Functions', () => {
       expect(result).toEqual(50);
     });
 
-    it('Should return a fixed discount', () => {
+    it("Should return a fixed discount", () => {
       const coupons = [{
         "code": "Eighty",
         "type": "FIXED",
@@ -56,7 +56,7 @@ describe('Cart Functions', () => {
       expect(result).toEqual(80);
     });
 
-    it('Should return the shipping discount', () => {
+    it("Should return the shipping discount", () => {
       const coupons = [{
         "code": "ITSFREE",
         "type": "FREE-SHIPPING",
@@ -71,8 +71,8 @@ describe('Cart Functions', () => {
     });
   });
 
-  describe('totalValue', () => {
-    it('Should return the total value of products', () => {
+  describe("totalValue", () => {
+    it("Should return the total value of products", () => {
       const products = [
         {
           "id": 1,
@@ -105,8 +105,8 @@ describe('Cart Functions', () => {
     });
   });
 
-  describe('totalWeight', () => {
-    it('Should return the total weight of products', () => {
+  describe("totalWeight", () => {
+    it("Should return the total weight of products", () => {
       const products = [
         {
           "id": 5,
@@ -139,18 +139,18 @@ describe('Cart Functions', () => {
     });
   });
 
-  describe('totalPurchase', () => {
+  describe("totalPurchase", () => {
     const valueTotal = 100;
     const valueShipping = 50;
 
-    it('Should return 0 when purchase price is less than minimum', () => {
+    it("Should return 0 when purchase price is less than minimum", () => {
       const valueDiscount =  200;
 
       const result = functions.totalPurchase(valueTotal, valueShipping, valueDiscount);
       expect(result).toEqual(0);
     });
 
-    it('Should return the total purchase', () => {
+    it("Should return the total purchase", () => {
       const valueDiscount =  20;
 
       const result = functions.totalPurchase(valueTotal, valueShipping, valueDiscount);

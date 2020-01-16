@@ -1,10 +1,10 @@
 module.exports = {
-  presets: ['@babel/preset-env', '@babel/preset-react'],
+  presets: ["@babel/preset-env", "@babel/preset-react"],
   plugins: [
     [
-      'babel-plugin-root-import',
+      "babel-plugin-root-import",
       {
-        rootPathSuffix: 'src'
+        rootPathSuffix: "src"
       }
     ]
   ]

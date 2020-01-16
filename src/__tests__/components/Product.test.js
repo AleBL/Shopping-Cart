@@ -1,5 +1,5 @@
-import React from 'react';
-import { shallow } from 'enzyme';
+import React from "react";
+import { shallow } from "enzyme";
 import Product from "../../components/Product"
 
 const setup = () => {
@@ -16,30 +16,30 @@ const setup = () => {
   };
 };
 
-describe('Product Component', () => {
-  describe('render', () => {
+describe("Product Component", () => {
+  describe("render", () => {
     const { enzymeWrapper } = setup();
 
-    it('Should render the div of Product', () => {
-      const div = enzymeWrapper.find('div');
+    it("Should render the div of Product", () => {
+      const div = enzymeWrapper.find("div");
 
       expect(div).toHaveLength(1);
     });
 
-    it('Should render the a of Product', () => {
-      const a = enzymeWrapper.find('a');
+    it("Should render the a of Product", () => {
+      const a = enzymeWrapper.find("a");
 
       expect(a).toHaveLength(1);
     });
 
-    it('Should render the img of Product', () => {
-      const img = enzymeWrapper.find('img');
+    it("Should render the img of Product", () => {
+      const img = enzymeWrapper.find("img");
 
       expect(img).toHaveLength(1);
     });
 
-    it('Should render the buttons add cart and remove item of Product', () => {
-      const button = enzymeWrapper.find('button');
+    it("Should render the buttons add cart and remove item of Product", () => {
+      const button = enzymeWrapper.find("button");
 
       expect(button).toHaveLength(2);
     });

@@ -1,5 +1,5 @@
-import React from 'react';
-import { shallow } from 'enzyme';
+import React from "react";
+import { shallow } from "enzyme";
 import ProductList from "../../components/ProductList"
 
 const setup = () => {
@@ -16,13 +16,13 @@ const setup = () => {
   };
 };
 
-describe('ProductList Component', () => {
-  describe('render', () => {
+describe("ProductList Component", () => {
+  describe("render", () => {
     const { enzymeWrapper } = setup();
 
 
-    it('Should render the Product of ProductList', () => {
-      const div = enzymeWrapper.find('Product');
+    it("Should render the Product of ProductList", () => {
+      const div = enzymeWrapper.find("Product");
 
       expect(div).toHaveLength(1);
     });
