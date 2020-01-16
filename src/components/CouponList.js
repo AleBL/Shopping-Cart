@@ -1,5 +1,5 @@
 import React from "react"
-import util from "../util"
+import util from "../util/util"
 
 const couponsDefaults = {
   "PERCENTUAL": {
