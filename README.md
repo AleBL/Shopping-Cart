@@ -38,6 +38,3 @@ Open [http://localhost:8000/coupons](http://localhost:8000/coupons) to view coup
 
 ### `yarn start`
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-### `yarn build`
-To create a production build.
