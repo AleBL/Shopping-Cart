@@ -8,23 +8,23 @@ const ShoppingCart = (props) => {
   return (
     <Fragment>
       <ProductList
-        addToCart={props.addToCart}
-        products={props.products}
-        removeItem={props.removeItem}
+        addToCart={ props.addToCart }
+        products={ props.products }
+        removeItem={ props.removeItem }
       />
       <CouponContainer
-        changeCoupon={props.changeCoupon}
-        addCoupon={props.addCoupon}
-        removeCoupon={props.removeCoupon}
-        couponsApplied={props.couponsApplied}
+        changeCoupon={ props.changeCoupon }
+        addCoupon={ props.addCoupon }
+        removeCoupon={ props.removeCoupon }
+        couponsApplied={ props.couponsApplied }
       />
       <SelectedProductsList
-        products={props.cartItems}
-        removeProduct={props.removeProduct}
+        products={ props.cartItems }
+        removeProduct={ props.removeProduct }
       />
       <ShoppingCartSummary
-        products={props.cartItems}
-        coupons={props.couponsApplied}
+        products={ props.cartItems }
+        coupons={ props.couponsApplied }
       />
     </Fragment>
   );

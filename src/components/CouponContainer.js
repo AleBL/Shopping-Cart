@@ -6,12 +6,12 @@ const CouponContainer = (props) => {
   return (
     <Fragment>
       <CouponForm
-        changeCoupon={props.changeCoupon}
-        addCoupon={props.addCoupon}
+        changeCoupon={ props.changeCoupon }
+        addCoupon={ props.addCoupon }
       />
       <CouponList
-        coupons={props.couponsApplied}
-        removeCoupon={props.removeCoupon}
+        coupons={ props.couponsApplied }
+        removeCoupon={ props.removeCoupon }
       />
     </Fragment>
   )

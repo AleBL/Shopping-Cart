@@ -85,7 +85,7 @@ class ShoppingCartContainer extends Component {
     const [coupon, ...rest] = coupons.filter(coupon => coupon.code === couponCode);
     const [coupomApplied] = couponsApplied.filter(coupon => coupon.code === couponCode);
     
-    if (coupon && !coupomApplied){// && couponsApplied.length <= 0) {
+    if (coupon && !coupomApplied){
       couponsApplied.push({ ...coupon });
     }
     

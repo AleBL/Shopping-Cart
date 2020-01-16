@@ -9,8 +9,8 @@ class ProductList extends Component {
           this.props.products.map(product => (
             <Product
              product={ product }
-             removeItem={this.props.removeItem}
-             addToCart={this.props.addToCart} />
+             removeItem={ this.props.removeItem }
+             addToCart={ this.props.addToCart } />
           ))
         }
       </Fragment>
