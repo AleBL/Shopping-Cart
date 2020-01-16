@@ -10,9 +10,9 @@ describe('Cart Functions', () => {
       expect(result).toEqual(0);
     });
 
-    it('Should return 30 when kg is between 0-10', () => {
+    it('Should return 30 when kg is between 1-10', () => {
       const totalValue = Math.floor(Math.random() * 10);
-      const totalWeight = Math.floor(Math.random() * 10);
+      const totalWeight = Math.floor(Math.random() * 10) + 1;
 
       const result = functions.shippingValue(totalValue, totalWeight);
       expect(result).toEqual(30);
