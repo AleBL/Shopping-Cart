@@ -10,7 +10,9 @@
     "react-scripts": "5.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently \"yarn start:app\" \"yarn start:json-server\"",
+    "start:app": "react-scripts start",
+    "start:json-server": "json-server --watch public/db.json --port 8000",
     "build": "react-scripts build",
     "test": "jest",
     "eject": "react-scripts eject"
@@ -31,12 +33,14 @@
     ]
   },
   "devDependencies": {
-    "jest": "^29.7.0",
     "babel-jest": "^29.7.0",
     "babel-plugin-root-import": "^6.6.0",
+    "concurrently": "^9.1.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.8",
     "enzyme-to-json": "^3.6.2",
+    "jest": "^29.7.0",
+    "json-server": "^1.0.0-beta.3",
     "react-addons-test-utils": "^15.6.2",
     "react-test-renderer": "^18.3.1"
   },
