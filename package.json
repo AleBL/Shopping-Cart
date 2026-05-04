@@ -12,7 +12,9 @@
     "react-scripts": "5.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently \"yarn start:web\" \"yarn start:api\"",
+    "start:web": "react-scripts start",
+    "start:api": "json-server --watch public/db.json --port 8000",
     "build": "react-scripts build",
     "test": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject"
@@ -32,5 +34,8 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "json-server": "^1.0.0-beta.3"
+  }
 }
