@@ -3,7 +3,11 @@ import ShoppingCart from "./ShoppingCart.js"
 import * as cartFunctions from "../util/cartFunctions.js"
 import util from "../util/util"
 
-const baseApiPath = "http://localhost:8000/";
+// Allow explicit API override via REACT_APP_API_URL, otherwise auto-detect.
+const baseApiPath = process.env.REACT_APP_API_URL
+  || (typeof window !== "undefined" && window.location.hostname === "localhost"
+    ? "http://localhost:8000/"
+    : "/api/");
 const productsPath = "products";
 const couponsPath = "coupons";
 
