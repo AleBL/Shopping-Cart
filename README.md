@@ -1,40 +1,49 @@
-# SHOPPING CART
+# 🛒 Shopping Cart
 
-## Shipping rules
-All shipping calculations are made over the subtotal WITHOUT the shipping costs and WITHOUT any discounts.
-For purchases above R$400,00 the shipping is free!
-For purchases bellow or equal 10kg the shipping price is: R$30.
-Each 5kg above 10kg will add R$7 to the shipping price.
+## 🚚 Shipping Rules
+- All shipping calculations are made over the subtotal **without** the shipping costs and **without** any discounts.
+- For purchases above **R$400.00**, the shipping is **free**!
+- For purchases up to **10kg**, the shipping cost is: **R$30**.
+- Each **5kg above** 10kg will add **R$7** to the shipping price.
 
-## The system should support these kinds of coupons
-Percentual coupon: are coupons that reduce an amount in percentage of the cost on subtotal. \
-Fixed coupon: are coupons with fixed amounts that should reduce over the TOTAL. \
-Free Shipping: make the shipping price become 0 when applied, and should have a minimum subtotal requirement.
+## 🎟 Supported Coupon Types
+- **Percentage Coupon**: Coupons that reduce an amount in percentage of the cost on subtotal.
+- **Fixed Coupon**: Coupons with fixed amounts that should reduce over the **total**.
+- **Free Shipping**: Makes the shipping price become **0** when applied, and should have a minimum subtotal requirement.
 
-## Available Products
-Banana, price: R$10 per kg \
-Apple, R$20 per kg \
-Orange, R$30 per kg
+## 🍎 Available Products
+| Product | Price |
+|---------|-------|
+| Banana  | R$10 per kg |
+| Apple   | R$20 per kg |
+| Orange  | R$30 per kg |
 
-## Enabled Coupons
-A: percentual coupon of 30% \
-FOO: fixed coupon of R$100,00 \
-C: free shipping coupon with minimum value of R$300,50
+## 💰 Enabled Coupons
+- **A**: percentage coupon of 30%
+- **FOO**: fixed coupon of R$100.00
+- **C**: free shipping coupon with minimum value of R$300.50
 
-# Setup
+# ⚙️ Setup
 
-## Install Dependencies
-### `npm install -g json-server`
-### `yarn install`
+## 📦 Install Dependencies
+```sh
+yarn install
+```
 
-### `yarn test`
-To run the test suite
+## 🧪 Run Tests
+To run the test suite:
+```sh
+yarn test
+```
 
-## Run the server
-### `json-server public/db.json --port 8000`
-Start the fake API-REST
-Open [http://localhost:8000/products](http://localhost:8000/products) to view products it in the browser.
-Open [http://localhost:8000/coupons](http://localhost:8000/coupons) to view coupons it in the browser.
+## 🚀 Run the Application
+```sh
+yarn start
+```
 
-### `yarn start`
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Open [http://localhost:8000/products](http://localhost:8000/products) to view products in the browser.
+- Open [http://localhost:8000/coupons](http://localhost:8000/coupons) to view coupons in the browser.
+
+- Open [http://localhost:3000](http://localhost:3000) to view the application in the browser.
+
+I hope this helps! If you need anything else, feel free to ask. 😉
