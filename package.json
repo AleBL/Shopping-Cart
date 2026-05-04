@@ -12,7 +12,9 @@
     "react-scripts": "5.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently \"yarn start:app\" \"yarn start:json-server\"",
+    "start:app": "react-scripts start",
+    "start:json-server": "json-server --watch public/db.json --port 8000",
     "build": "react-scripts build",
     "test": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject"
