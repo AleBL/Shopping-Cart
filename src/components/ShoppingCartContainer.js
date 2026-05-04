@@ -3,11 +3,19 @@ import ShoppingCart from "./ShoppingCart.js"
 import * as cartFunctions from "../util/cartFunctions.js"
 import util from "../util/util"
 
-// Allow explicit API override via REACT_APP_API_URL, otherwise auto-detect.
-const baseApiPath = process.env.REACT_APP_API_URL
-  || (typeof window !== "undefined" && window.location.hostname === "localhost"
-    ? "http://localhost:8000/"
-    : "/api/");
+function resolveApiBasePath() {
+  const envApi = process.env.REACT_APP_API_URL;
+  const isLocalhost = typeof window !== "undefined" && window.location.hostname === "localhost";
+
+  // In production, ignore localhost env values to prevent broken requests on Vercel.
+  if (envApi && !(envApi.includes("localhost") && !isLocalhost)) {
+    return envApi.endsWith("/") ? envApi : `${envApi}/`;
+  }
+
+  return isLocalhost ? "http://localhost:8000/" : "/api/";
+}
+
+const baseApiPath = resolveApiBasePath();
 const productsPath = "products";
 const couponsPath = "coupons";
 
