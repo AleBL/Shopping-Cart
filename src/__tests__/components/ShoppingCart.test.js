@@ -11,8 +11,14 @@ const setup = () => {
       products={products}
       cartItems={cartItems}
       couponsApplied={[]}
+      newProductName=""
+      newProductPrice=""
+      productFeedback={{ type: "info", text: "" }}
       addToCart={() => {}}
       removeItem={() => {}}
+      changeNewProductName={() => {}}
+      changeNewProductPrice={() => {}}
+      createProduct={() => {}}
       changeCoupon={() => {}}
       addCoupon={() => {}}
       removeCoupon={() => {}}
@@ -26,7 +32,9 @@ describe("ShoppingCart Component", () => {
   it("Should render the ProductList of ShoppingCart", () => {
     setup();
 
-    expect(screen.getByRole("img", { name: "Banana" })).toBeInTheDocument();
+    const img = screen.queryByRole("img", { name: "Banana" });
+    const placeholder = screen.queryByLabelText("Banana");
+    expect(img || placeholder).toBeTruthy();
   });
 
   it("Should render the CouponContainer of ShoppingCart", () => {

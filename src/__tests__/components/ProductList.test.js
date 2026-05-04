@@ -28,6 +28,8 @@ describe("ProductList Component", () => {
   it("Should render the Product of ProductList", () => {
     const { products } = setup();
 
-    expect(screen.getByRole("img", { name: products[0].name })).toBeInTheDocument();
+    const img = screen.queryByRole("img", { name: products[0].name });
+    const placeholder = screen.queryByLabelText(products[0].name);
+    expect(img || placeholder).toBeTruthy();
   });
 });

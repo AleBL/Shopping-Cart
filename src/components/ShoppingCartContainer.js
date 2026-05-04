@@ -13,6 +13,12 @@ class ShoppingCartContainer extends Component {
     cartItems: [],
     coupons: [],
     couponsApplied: [],
+    newProductName: "",
+    newProductPrice: "",
+    productFeedback: {
+      type: "info",
+      text: ""
+    },
     couponCode: "",
     couponFeedback: {
       type: "info",
@@ -77,6 +83,93 @@ class ShoppingCartContainer extends Component {
     
     const newState = { ...this.state, cartItems: cartItems };
     this.setState(newState);
+  }
+
+  changeNewProductName = (value) => {
+    this.setState({
+      ...this.state,
+      newProductName: value,
+      productFeedback: {
+        type: "info",
+        text: ""
+      }
+    });
+  }
+
+  changeNewProductPrice = (value) => {
+    this.setState({
+      ...this.state,
+      newProductPrice: value,
+      productFeedback: {
+        type: "info",
+        text: ""
+      }
+    });
+  }
+
+  createProduct = async () => {
+    const { newProductName, newProductPrice, products } = this.state;
+    const parsedPrice = parseFloat(newProductPrice);
+
+    if (!newProductName.trim()) {
+      this.setState({
+        ...this.state,
+        productFeedback: {
+          type: "error",
+          text: "Product name is required."
+        }
+      });
+      return;
+    }
+
+    if (Number.isNaN(parsedPrice) || parsedPrice <= 0) {
+      this.setState({
+        ...this.state,
+        productFeedback: {
+          type: "error",
+          text: "Price per kg must be greater than zero."
+        }
+      });
+      return;
+    }
+
+    try {
+      const response = await fetch(baseApiPath + productsPath, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name: newProductName.trim(),
+          price_per_kg: parsedPrice
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error("Could not create product");
+      }
+
+      const newProduct = await response.json();
+
+      this.setState({
+        ...this.state,
+        products: [...products, newProduct],
+        newProductName: "",
+        newProductPrice: "",
+        productFeedback: {
+          type: "success",
+          text: `Product ${newProduct.name} created successfully.`
+        }
+      });
+    } catch (_error) {
+      this.setState({
+        ...this.state,
+        productFeedback: {
+          type: "error",
+          text: "Could not create product. Check if API server is running."
+        }
+      });
+    }
   }
 
   changeCoupon = (inputText) => {
@@ -162,6 +255,12 @@ class ShoppingCartContainer extends Component {
         products={ this.state.products }
         addToCart={ this.addToCart } 
         removeItem={ this.removeItem } 
+        newProductName={ this.state.newProductName }
+        newProductPrice={ this.state.newProductPrice }
+        productFeedback={ this.state.productFeedback }
+        changeNewProductName={ this.changeNewProductName }
+        changeNewProductPrice={ this.changeNewProductPrice }
+        createProduct={ this.createProduct }
         changeCoupon={ this.changeCoupon } 
         addCoupon={ this.addCoupon } 
         removeCoupon={ this.removeCoupon } 
