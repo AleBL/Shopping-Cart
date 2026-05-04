@@ -1,30 +1,33 @@
 import React from "react";
-import { shallow } from "enzyme";
-import ProductList from "../../components/ProductList"
+import { render, screen } from "@testing-library/react";
+import ProductList from "../../components/ProductList";
 
 const setup = () => {
-  const products = [{
-    "id": 1,
-    "name": "Banana",
-    "price_per_kg": 10.0
-  }];
+  const products = [
+    {
+      id: 1,
+      name: "Banana",
+      price_per_kg: 10.0
+    }
+  ];
 
-  const enzymeWrapper = shallow(<ProductList products={products}/>);
+  render(
+    <ProductList
+      products={products}
+      addToCart={() => {}}
+      removeItem={() => {}}
+    />
+  );
 
   return {
-    enzymeWrapper
+    products
   };
 };
 
 describe("ProductList Component", () => {
-  describe("render", () => {
-    const { enzymeWrapper } = setup();
+  it("Should render the Product of ProductList", () => {
+    const { products } = setup();
 
-
-    it("Should render the Product of ProductList", () => {
-      const div = enzymeWrapper.find("Product");
-
-      expect(div).toHaveLength(1);
-    });
+    expect(screen.getByRole("img", { name: products[0].name })).toBeInTheDocument();
   });
 });

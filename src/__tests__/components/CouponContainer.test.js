@@ -1,29 +1,31 @@
 import React from "react";
-import { shallow } from "enzyme";
-import CouponContainer from "../../components/CouponContainer"
-
-const setup = () => {
-  const enzymeWrapper = shallow(<CouponContainer />);
-
-  return {
-    enzymeWrapper
-  };
-};
+import { render, screen } from "@testing-library/react";
+import CouponContainer from "../../components/CouponContainer";
 
 describe("CouponContainer Component", () => {
-  describe("render", () => {
-    const { enzymeWrapper } = setup();
+  it("Should render the CouponForm of CouponContainer", () => {
+    render(
+      <CouponContainer
+        changeCoupon={() => {}}
+        addCoupon={() => {}}
+        removeCoupon={() => {}}
+        couponsApplied={[]}
+      />
+    );
 
-    it("Should render the CouponForm of CouponContainer", () => {
-      const couponForm = enzymeWrapper.find("CouponForm");
+    expect(screen.getByPlaceholderText("Coupon Code")).toBeInTheDocument();
+  });
 
-      expect(couponForm).toHaveLength(1);
-    });
+  it("Should render the CouponList of CouponContainer", () => {
+    render(
+      <CouponContainer
+        changeCoupon={() => {}}
+        addCoupon={() => {}}
+        removeCoupon={() => {}}
+        couponsApplied={[]}
+      />
+    );
 
-    it("Should render the CouponList of CouponContainer", () => {
-      const couponList = enzymeWrapper.find("CouponList");
-
-      expect(couponList).toHaveLength(1);
-    });
+    expect(screen.getByText("Coupons:")).toBeInTheDocument();
   });
 });

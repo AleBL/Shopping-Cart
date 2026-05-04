@@ -8,6 +8,7 @@ class ProductList extends Component {
         {
           this.props.products.map(product => (
             <Product
+             key={ product.id }
              product={ product }
              removeItem={ this.props.removeItem }
              addToCart={ this.props.addToCart } />

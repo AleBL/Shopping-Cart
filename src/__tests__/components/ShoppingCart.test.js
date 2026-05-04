@@ -1,41 +1,48 @@
 import React from "react";
-import { shallow } from "enzyme";
-import ShoppingCart from "../../components/ShoppingCart"
+import { render, screen } from "@testing-library/react";
+import ShoppingCart from "../../components/ShoppingCart";
 
 const setup = () => {
-  const enzymeWrapper = shallow(<ShoppingCart />);
+  const products = [{ id: 1, name: "Banana", price_per_kg: 10.0 }];
+  const cartItems = [{ id: 1, name: "Banana", price_per_kg: 10.0, count: 2 }];
 
-  return {
-    enzymeWrapper
-  };
+  render(
+    <ShoppingCart
+      products={products}
+      cartItems={cartItems}
+      couponsApplied={[]}
+      addToCart={() => {}}
+      removeItem={() => {}}
+      changeCoupon={() => {}}
+      addCoupon={() => {}}
+      removeCoupon={() => {}}
+      removeProduct={() => {}}
+    />
+  );
 };
 
 describe("ShoppingCart Component", () => {
-  describe("render", () => {
-    const { enzymeWrapper } = setup();
+  it("Should render the ProductList of ShoppingCart", () => {
+    setup();
 
-    it("Should render the ProductList of ShoppingCart", () => {
-      const productList = enzymeWrapper.find("ProductList");
+    expect(screen.getByRole("img", { name: "Banana" })).toBeInTheDocument();
+  });
 
-      expect(productList).toHaveLength(1);
-    });
+  it("Should render the CouponContainer of ShoppingCart", () => {
+    setup();
 
-    it("Should render the CouponContainer of ShoppingCart", () => {
-      const couponContainer = enzymeWrapper.find("CouponContainer");
+    expect(screen.getByPlaceholderText("Coupon Code")).toBeInTheDocument();
+  });
 
-      expect(couponContainer).toHaveLength(1);
-    });
+  it("Should render the SelectedProductsList of ShoppingCart", () => {
+    setup();
 
-    it("Should render the SelectedProductsList of ShoppingCart", () => {
-      const selectedProductsList = enzymeWrapper.find("SelectedProductsList");
+    expect(screen.getByRole("list")).toBeInTheDocument();
+  });
 
-      expect(selectedProductsList).toHaveLength(1);
-    });
+  it("Should render the ShoppingCartSummary of ShoppingCart", () => {
+    setup();
 
-    it("Should render the ShoppingCartSummary of ShoppingCart", () => {
-      const shoppingCartSummary = enzymeWrapper.find("ShoppingCartSummary");
-
-      expect(shoppingCartSummary).toHaveLength(1);
-    });
+    expect(screen.getByRole("button", { name: "Purchase" })).toBeInTheDocument();
   });
 });

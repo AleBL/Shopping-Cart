@@ -14,7 +14,7 @@ class ShoppingCartContainer extends Component {
     couponCode: ""
   }
 
-  componentWillMount() {
+  componentDidMount() {
     Promise.all([
       fetch(baseApiPath + productsPath),
       fetch(baseApiPath + couponsPath)

@@ -1,47 +1,47 @@
 import React from "react";
-import { shallow } from "enzyme";
-import Product from "../../components/Product"
+import { render, screen } from "@testing-library/react";
+import Product from "../../components/Product";
 
-const setup = () => {
-  const product = {
-    "id": 1,
-    "name": "Banana",
-    "price_per_kg": 10.0
-  };
-
-  const enzymeWrapper = shallow(<Product product={product}/>);
-
-  return {
-    enzymeWrapper
-  };
+const product = {
+  id: 1,
+  name: "Banana",
+  price_per_kg: 10.0
 };
 
 describe("Product Component", () => {
-  describe("render", () => {
-    const { enzymeWrapper } = setup();
+  it("Should render the Product image", () => {
+    render(
+      <Product
+        product={product}
+        addToCart={() => {}}
+        removeItem={() => {}}
+      />
+    );
 
-    it("Should render the div of Product", () => {
-      const div = enzymeWrapper.find("div");
+    expect(screen.getByRole("img", { name: "Banana" })).toBeInTheDocument();
+  });
 
-      expect(div).toHaveLength(1);
-    });
+  it("Should render the Product link", () => {
+    render(
+      <Product
+        product={product}
+        addToCart={() => {}}
+        removeItem={() => {}}
+      />
+    );
 
-    it("Should render the a of Product", () => {
-      const a = enzymeWrapper.find("a");
+    expect(screen.getByRole("link")).toBeInTheDocument();
+  });
 
-      expect(a).toHaveLength(1);
-    });
+  it("Should render add and remove buttons", () => {
+    render(
+      <Product
+        product={product}
+        addToCart={() => {}}
+        removeItem={() => {}}
+      />
+    );
 
-    it("Should render the img of Product", () => {
-      const img = enzymeWrapper.find("img");
-
-      expect(img).toHaveLength(1);
-    });
-
-    it("Should render the buttons add cart and remove item of Product", () => {
-      const button = enzymeWrapper.find("button");
-
-      expect(button).toHaveLength(2);
-    });
+    expect(screen.getAllByRole("button")).toHaveLength(2);
   });
 });

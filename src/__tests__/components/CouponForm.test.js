@@ -1,35 +1,17 @@
 import React from "react";
-import { shallow } from "enzyme";
-import CouponForm from "../../components/CouponForm"
-
-const setup = () => {
-  const enzymeWrapper = shallow(<CouponForm />);
-
-  return {
-    enzymeWrapper
-  };
-};
+import { render, screen } from "@testing-library/react";
+import CouponForm from "../../components/CouponForm";
 
 describe("CouponForm Component", () => {
-  describe("render", () => {
-    const { enzymeWrapper } = setup();
+  it("Should render the input coupon code of CouponForm", () => {
+    render(<CouponForm changeCoupon={() => {}} addCoupon={() => {}} />);
 
-    it("Should render the div of CouponForm", () => {
-      const div = enzymeWrapper.find("div");
+    expect(screen.getByPlaceholderText("Coupon Code")).toBeInTheDocument();
+  });
 
-      expect(div).toHaveLength(1);
-    });
+  it("Should render the button add coupon of CouponForm", () => {
+    render(<CouponForm changeCoupon={() => {}} addCoupon={() => {}} />);
 
-    it("Should render the input coupon code of CouponForm", () => {
-      const input = enzymeWrapper.find("input");
-
-      expect(input).toHaveLength(1);
-    });
-
-    it("Should render the button add coupon of CouponForm", () => {
-      const button = enzymeWrapper.find("button");
-
-      expect(button).toHaveLength(1);
-    });
+    expect(screen.getByRole("button", { name: "Apply" })).toBeInTheDocument();
   });
 });
