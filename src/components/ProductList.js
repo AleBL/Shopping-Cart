@@ -4,7 +4,7 @@ import Product from "./Product"
 class ProductList extends Component {
   render() {
     return (
-      <Fragment>
+      <div className="product-list">
         {
           this.props.products.map(product => (
             <Product
@@ -14,7 +14,7 @@ class ProductList extends Component {
              addToCart={ this.props.addToCart } />
           ))
         }
-      </Fragment>
+      </div>
     )
   }
 }

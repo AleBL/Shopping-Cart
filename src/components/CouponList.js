@@ -28,13 +28,13 @@ const couponSignal = (coupon) => {
 
 const CouponList = (props) => {
   return (
-    <div>
-        <p>Coupons: </p>
+    <div className="coupon-list">
+        <p className="coupon-list-title">Coupons:</p>
         {
            props.coupons.map(coupon => (
-            <div key={ coupon.code } >
-              <p> 
-                { `${coupon.code} : ${couponValue(coupon)} ${couponSignal(coupon)}` } 
+            <div key={ coupon.code } className="coupon-pill">
+              <p>
+                { `${coupon.code} : ${couponValue(coupon)} ${couponSignal(coupon)}` }
 
                 <button type="submit" className="btn-small btn-danger"
                   onClick={ (e) => props.removeCoupon(coupon) }>
