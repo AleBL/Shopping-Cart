@@ -8,6 +8,7 @@ const CouponContainer = (props) => {
       <CouponForm
         changeCoupon={ props.changeCoupon }
         addCoupon={ props.addCoupon }
+        couponFeedback={ props.couponFeedback }
       />
       <CouponList
         coupons={ props.couponsApplied }

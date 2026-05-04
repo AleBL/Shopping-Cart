@@ -10,6 +10,7 @@ describe("CouponContainer Component", () => {
         addCoupon={() => {}}
         removeCoupon={() => {}}
         couponsApplied={[]}
+        couponFeedback={{ type: "info", text: "" }}
       />
     );
 
@@ -23,6 +24,7 @@ describe("CouponContainer Component", () => {
         addCoupon={() => {}}
         removeCoupon={() => {}}
         couponsApplied={[]}
+        couponFeedback={{ type: "info", text: "" }}
       />
     );
 

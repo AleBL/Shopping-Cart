@@ -16,6 +16,7 @@ const setup = () => {
       changeCoupon={() => {}}
       addCoupon={() => {}}
       removeCoupon={() => {}}
+      couponFeedback={{ type: "info", text: "" }}
       removeProduct={() => {}}
     />
   );

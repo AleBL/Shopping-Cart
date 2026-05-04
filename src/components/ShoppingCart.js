@@ -28,6 +28,7 @@ const ShoppingCart = (props) => {
             addCoupon={ props.addCoupon }
             removeCoupon={ props.removeCoupon }
             couponsApplied={ props.couponsApplied }
+            couponFeedback={ props.couponFeedback }
           />
         </article>
 

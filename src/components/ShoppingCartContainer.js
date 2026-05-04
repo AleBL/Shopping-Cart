@@ -1,5 +1,7 @@
 import React, { Component } from "react"
 import ShoppingCart from "./ShoppingCart.js"
+import * as cartFunctions from "../util/cartFunctions.js"
+import util from "../util/util"
 
 const baseApiPath = "http://localhost:8000/";
 const productsPath = "products";
@@ -11,7 +13,11 @@ class ShoppingCartContainer extends Component {
     cartItems: [],
     coupons: [],
     couponsApplied: [],
-    couponCode: ""
+    couponCode: "",
+    couponFeedback: {
+      type: "info",
+      text: ""
+    }
   }
 
   componentDidMount() {
@@ -75,21 +81,68 @@ class ShoppingCartContainer extends Component {
 
   changeCoupon = (inputText) => {
     const couponCode = inputText;
-    const newState = {...this.state, couponCode }
+    const newState = {
+      ...this.state,
+      couponCode,
+      couponFeedback: {
+        type: "info",
+        text: ""
+      }
+    }
 
     this.setState(newState);
   }
 
   addCoupon = () => {
-    const { coupons, couponCode, couponsApplied } = this.state;
-    const [coupon, ...rest] = coupons.filter(coupon => coupon.code === couponCode);
-    const [coupomApplied] = couponsApplied.filter(coupon => coupon.code === couponCode);
-    
-    if (coupon && !coupomApplied){
-      couponsApplied.push({ ...coupon });
+    const { coupons, couponCode, couponsApplied, cartItems } = this.state;
+    const normalizedCode = couponCode.trim().toUpperCase();
+    const [coupon] = coupons.filter((item) => item.code.toUpperCase() === normalizedCode);
+    const [coupomApplied] = couponsApplied.filter((item) => item.code === normalizedCode);
+    const totalCartValue = cartFunctions.totalValue(cartItems);
+
+    if (!coupon) {
+      this.setState({
+        ...this.state,
+        couponFeedback: {
+          type: "error",
+          text: "Coupon not found."
+        }
+      });
+      return;
+    }
+
+    if (coupomApplied) {
+      this.setState({
+        ...this.state,
+        couponFeedback: {
+          type: "error",
+          text: `Coupon ${coupon.code} has already been applied.`
+        }
+      });
+      return;
+    }
+
+    if (coupon.activation_value > totalCartValue) {
+      this.setState({
+        ...this.state,
+        couponFeedback: {
+          type: "error",
+          text: `Coupon ${coupon.code} was not applied. Minimum value: ${util.formatCurrencyBRL(coupon.activation_value)}.`
+        }
+      });
+      return;
     }
     
-    const newState = { ...this.state, couponsApplied };
+    couponsApplied.push({ ...coupon });
+    
+    const newState = {
+      ...this.state,
+      couponsApplied,
+      couponFeedback: {
+        type: "success",
+        text: `Coupon ${coupon.code} applied successfully.`
+      }
+    };
     
     this.setState(newState);
   };
@@ -113,6 +166,7 @@ class ShoppingCartContainer extends Component {
         addCoupon={ this.addCoupon } 
         removeCoupon={ this.removeCoupon } 
         couponsApplied={ this.state.couponsApplied } 
+        couponFeedback={ this.state.couponFeedback }
         cartItems={ this.state.cartItems } 
         removeProduct={ this.removeProduct } />
     );

@@ -194,6 +194,27 @@
   gap: 0.45rem;
 }
 
+.coupon-feedback {
+  margin: 0.15rem 0 0;
+  padding: 0.5rem 0.6rem;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  font-size: 0.83rem;
+  font-weight: 600;
+}
+
+.coupon-feedback-success {
+  background: #e9fff6;
+  border-color: #8ad0b1;
+  color: #0b5f42;
+}
+
+.coupon-feedback-error {
+  background: #fff1f2;
+  border-color: #f0a5ac;
+  color: #8b1d2b;
+}
+
 .coupon-label {
   font-size: 0.77rem;
   font-weight: 700;
