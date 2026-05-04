@@ -1,11 +1,21 @@
-import React from "react"
+import React, { useState } from "react"
 import util from "../util/util"
 
 const Product = (props) => {
+  const [imgError, setImgError] = useState(false);
+
   return (
     <article className="product-item" key={ props.product.id }>
       <a href={ `#${props.product.id}` } className="product-image-link">
-        <img src={`products/${props.product.name}.png`} alt={ props.product.name } className="product-image" />
+        { imgError
+          ? <div className="product-image-placeholder" aria-label={ props.product.name }>🛒</div>
+          : <img
+              src={`products/${props.product.name}.png`}
+              alt={ props.product.name }
+              className="product-image"
+              onError={ () => setImgError(true) }
+            />
+        }
       </a>
 
       <div className="product-meta">

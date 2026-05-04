@@ -9,7 +9,7 @@ const product = {
 };
 
 describe("Product Component", () => {
-  it("Should render the Product image", () => {
+  it("Should render the Product image or placeholder", () => {
     render(
       <Product
         product={product}
@@ -18,7 +18,9 @@ describe("Product Component", () => {
       />
     );
 
-    expect(screen.getByRole("img", { name: "Banana" })).toBeInTheDocument();
+    const img = screen.queryByRole("img", { name: "Banana" });
+    const placeholder = screen.queryByLabelText("Banana");
+    expect(img || placeholder).toBeTruthy();
   });
 
   it("Should render the Product link", () => {

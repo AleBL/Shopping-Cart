@@ -1,5 +1,6 @@
 import React, { Fragment } from "react"
 import ProductList from "./ProductList"
+import ProductCreator from "./ProductCreator"
 import CouponContainer from "./CouponContainer"
 import SelectedProductsList from "./SelectedProductsList"
 import ShoppingCartSummary from "./ShoppingCartSummary"
@@ -12,6 +13,14 @@ const ShoppingCart = (props) => {
           <div className="card-header">
             <h2>Products</h2>
           </div>
+          {/* <ProductCreator
+            newProductName={ props.newProductName }
+            newProductPrice={ props.newProductPrice }
+            changeNewProductName={ props.changeNewProductName }
+            changeNewProductPrice={ props.changeNewProductPrice }
+            createProduct={ props.createProduct }
+            productFeedback={ props.productFeedback }
+          /> */}
           <ProductList
             addToCart={ props.addToCart }
             products={ props.products }
