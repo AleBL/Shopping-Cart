@@ -1,6 +1,6 @@
 import { percentual } from "./constants.js"
 
-export default {
+const utils = {
   formatCurrencyBRL: function (num) {
       return num.toLocaleString("pt-BR", { style:"currency", currency:"BRL" });
   },
@@ -8,4 +8,6 @@ export default {
   percentualCalc: function (num) {
     return num * percentual;
   }
-}
+};
+
+export default utils

@@ -73,7 +73,7 @@ class ShoppingCartContainer extends Component {
 
   addToCart = (product) => {
     const { cartItems } = Object.assign(this.state);
-    const [item, ...rest] = cartItems.filter(item => item.id === product.id);
+    const [item] = cartItems.filter(item => item.id === product.id);
     
     if (item) {
       item.count += 1;
