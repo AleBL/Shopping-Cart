@@ -4,16 +4,17 @@ import CouponForm from "./CouponForm"
 
 const CouponContainer = (props) => {
   return (
-    <Fragment>
+    <div className="coupon-container">
       <CouponForm
         changeCoupon={ props.changeCoupon }
         addCoupon={ props.addCoupon }
+        couponFeedback={ props.couponFeedback }
       />
       <CouponList
         coupons={ props.couponsApplied }
         removeCoupon={ props.removeCoupon }
       />
-    </Fragment>
+    </div>
   )
 }
 

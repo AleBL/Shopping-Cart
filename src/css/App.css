@@ -1,43 +1,422 @@
-.App {
-  background-color: rgb(157, 181, 229);
-  display: grid;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: rgb(255, 255, 255);
-  min-height: 80vh;
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800&family=Bricolage+Grotesque:wght@700;800&display=swap");
+
+:root {
+  --bg-0: #f8f6ef;
+  --bg-1: #fffdf5;
+  --surface: #fff8e6;
+  --surface-2: #ffffff;
+  --text-main: #1e2230;
+  --text-soft: #444d62;
+  --line: #d3c69e;
+  --brand: #ce6f14;
+  --brand-strong: #a95605;
+  --accent: #1f9f95;
+  --accent-strong: #0f625d;
+  --danger: #bf2f41;
+  --danger-strong: #af2e3a;
+  --focus-ring: #1243bb;
+  --shadow: 0 20px 45px rgba(52, 62, 74, 0.16);
 }
 
-.Products-size {
-  width: 50px;
-  height: 50px;
+* {
+  box-sizing: border-box;
+}
+
+.app-shell {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 5% 5%, #ffe49d 0%, transparent 40%),
+    radial-gradient(circle at 100% 15%, #9debe4 0%, transparent 35%),
+    linear-gradient(135deg, var(--bg-0), var(--bg-1));
+  color: var(--text-main);
+}
+
+.app-background-glow {
+  position: absolute;
+  width: 360px;
+  height: 360px;
+  border-radius: 999px;
+  filter: blur(45px);
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.app-background-glow-left {
+  top: -160px;
+  left: -120px;
+  background: #f8ad3f;
+}
+
+.app-background-glow-right {
+  top: 10%;
+  right: -130px;
+  background: #33b6aa;
+}
+
+.app-layout {
+  width: min(1120px, 92vw);
+  margin: 0 auto;
+  padding: 2.5rem 0 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.app-hero {
+  margin-bottom: 1.5rem;
+  animation: fade-slide 0.5s ease-out;
+}
+
+.app-kicker {
+  margin: 0;
+  color: var(--brand-strong);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: 0.73rem;
+  font-weight: 700;
+}
+
+.app-title {
+  font-family: "Bricolage Grotesque", sans-serif;
+  margin: 0.2rem 0 0;
+  font-size: clamp(2rem, 4.2vw, 3.1rem);
+  line-height: 1.03;
+}
+
+.app-subtitle {
+  margin: 0.7rem 0 0;
+  color: var(--text-soft);
+  max-width: 60ch;
+  font-size: clamp(0.95rem, 1.9vw, 1.05rem);
+}
+
+.cart-grid {
+  display: grid;
+  grid-template-columns: 1.45fr 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+.card {
+  background: linear-gradient(160deg, var(--surface), var(--surface-2));
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 1rem;
+  box-shadow: var(--shadow);
+  animation: fade-slide 0.55s ease-out;
+}
+
+.card-header {
+  margin-bottom: 0.75rem;
+}
+
+.card-header h2 {
+  margin: 0;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 1.1rem;
+}
+
+.card-products,
+.card-selection {
+  grid-column: 1;
+}
+
+.card-coupons,
+.card-summary {
+  grid-column: 2;
+}
+
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
+  gap: 0.75rem;
+}
+
+.product-item {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 0.7rem;
+  background: #fff;
+  display: grid;
+  gap: 0.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.product-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 22px rgba(36, 49, 67, 0.14);
+  border-color: #baa66a;
+}
+
+.product-image-link {
+  display: inline-flex;
+  width: max-content;
+  border-radius: 10px;
+}
+
+.product-image-link:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.product-image {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+
+.product-meta {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.product-name {
+  font-size: 0.95rem;
+}
+
+.product-price {
+  color: var(--accent-strong);
+}
+
+.product-actions {
+  display: flex;
+  gap: 0.45rem;
+}
+
+.coupon-container {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.coupon-form {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.coupon-feedback {
+  margin: 0.15rem 0 0;
+  padding: 0.5rem 0.6rem;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  font-size: 0.83rem;
+  font-weight: 600;
+}
+
+.coupon-feedback-success {
+  background: #e9fff6;
+  border-color: #8ad0b1;
+  color: #0b5f42;
+}
+
+.coupon-feedback-error {
+  background: #fff1f2;
+  border-color: #f0a5ac;
+  color: #8b1d2b;
+}
+
+.coupon-label {
+  font-size: 0.77rem;
+  font-weight: 700;
+  color: var(--text-soft);
+  letter-spacing: 0.04em;
+}
+
+.coupon-input {
+  border: 1px solid #c8d0df;
+  border-radius: 10px;
+  font: inherit;
+  padding: 0.55rem 0.7rem;
+  color: var(--text-main);
+  background: #fff;
+}
+
+.coupon-input:focus,
+.coupon-input:focus-visible {
+  border-color: var(--accent);
+  outline: 3px solid rgba(18, 67, 187, 0.25);
+  outline-offset: 1px;
+}
+
+.coupon-list {
+  border-top: 1px dashed var(--line);
+  padding-top: 0.7rem;
+}
+
+.coupon-list-title {
+  margin: 0 0 0.5rem;
+  font-weight: 700;
+}
+
+.coupon-pill {
+  margin-bottom: 0.5rem;
+}
+
+.coupon-pill p {
+  margin: 0;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: #fff;
+  padding: 0.4rem 0.6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #25314d;
+}
+
+.selected-products-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.selected-product-item {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 0.65rem;
+}
+
+.selected-product-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.selected-product-meta {
+  margin: 0.45rem 0 0;
+  color: var(--text-soft);
+  font-size: 0.9rem;
+}
+
+.summary-panel {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.summary-row {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 0.55rem 0.65rem;
+  color: #273044;
+}
+
+.summary-total {
+  border-color: #9cc3bf;
+  background: #f2fffd;
 }
 
 .btn {
-  padding: 7px 15px;
+  padding: 0.58rem 0.9rem;
   text-align: center;
-  font-size: 12px;
-  margin: 4px 2px;
+  font-size: 0.82rem;
+  font-weight: 700;
   cursor: pointer;
-  border-radius: 12%;
-  color: rgb(255, 255, 255);
+  border-radius: 10px;
+  color: #fff;
+  border: none;
+  transition: transform 0.15s ease, filter 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.06);
+  box-shadow: 0 8px 15px rgba(30, 34, 48, 0.22);
+}
+
+.btn:active {
+  transform: translateY(0);
 }
 
 .btn-small {
-  border-radius: 15%;
-  color: rgb(255, 255, 255);
+  border-radius: 8px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  min-width: 30px;
+  min-height: 28px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  transition: filter 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-small:hover {
+  filter: brightness(1.06);
+  box-shadow: 0 6px 12px rgba(30, 34, 48, 0.2);
+}
+
+.btn-compact {
+  padding: 0.35rem 0.55rem;
 }
 
 .btn-success {
-  background-color: rgb(0, 183, 70);
-  border: 2px solid rgb(65, 175, 69);
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
 }
 
 .btn-danger {
-  background-color: rgb(244, 67, 54);
-  border: 2px solid rgb(209, 61, 41);
+  background: linear-gradient(135deg, var(--danger), var(--danger-strong));
 }
 
 .btn-primary {
-  background-color: rgb(45, 110, 207);
-  border: 2px solid rgb(64, 76, 243);
+  background: linear-gradient(135deg, var(--brand), var(--brand-strong));
+}
+
+.btn:focus-visible,
+.btn-small:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.coupon-pill button {
+  flex-shrink: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .product-item:hover,
+  .btn:hover {
+    transform: none;
+  }
+}
+
+@keyframes fade-slide {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 900px) {
+  .app-layout {
+    width: min(700px, 92vw);
+    padding-top: 1.6rem;
+  }
+
+  .cart-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card-products,
+  .card-selection,
+  .card-coupons,
+  .card-summary {
+    grid-column: 1;
+  }
 }

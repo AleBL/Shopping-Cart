@@ -10,10 +10,10 @@ const ShoppingCartSummary = (props) => {
   const purchaseValue = cartFunctions.totalPurchase(totalValueProducts, shippingValuePurchase, totalDiscountValue);
   
   return (
-    <div>
-      <div> <b>Shipping Value: { shippingValuePurchase }</b> </div>
-      <div> <b>Discount:       { totalDiscountValue }</b> </div>
-      <div> <b>Total:          { purchaseValue }</b> </div>
+    <div className="summary-panel">
+      <div className="summary-row"> <b>Shipping Value: { shippingValuePurchase }</b> </div>
+      <div className="summary-row"> <b>Discount:       { totalDiscountValue }</b> </div>
+      <div className="summary-row summary-total"> <b>Total:          { purchaseValue }</b> </div>
       <button className="btn btn-success" 
         onClick={ () => alert("Your Purchase was successfully sent") }>
         Purchase 

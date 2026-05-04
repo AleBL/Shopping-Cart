@@ -1,47 +1,48 @@
 import React from "react";
-import { shallow } from "enzyme";
-import CouponList from "../../components/CouponList"
+import { render, screen } from "@testing-library/react";
+import CouponList from "../../components/CouponList";
 
 const setup = () => {
-  const coupons = [{
-    "code": "A",
-    "type": "PERCENTUAL",
-    "value": 0.3,
-    "activation_value": 0
-  },
-  {
-    "code": "FOO",
-    "type": "FIXED",
-    "value": 100,
-    "activation_value": 0
-  },
-  {
-    "code": "C",
-    "type": "FREE-SHIPPING",
-    "activation_value": 300.5
-  }];
+  const coupons = [
+    {
+      code: "A",
+      type: "PERCENTUAL",
+      value: 0.3,
+      activation_value: 0
+    },
+    {
+      code: "FOO",
+      type: "FIXED",
+      value: 100,
+      activation_value: 0
+    },
+    {
+      code: "C",
+      type: "FREE-SHIPPING",
+      activation_value: 300.5
+    }
+  ];
 
-  const enzymeWrapper = shallow(<CouponList coupons={coupons}/>);
+  render(<CouponList coupons={coupons} removeCoupon={() => {}} />);
 
   return {
-    enzymeWrapper
+    coupons
   };
 };
 
 describe("CouponList Element", () => {
-  describe("render", () => {
-    const { enzymeWrapper } = setup();
+  it("Should render the title and all coupons", () => {
+    const { coupons } = setup();
 
-    it("Should render the p of CouponList", () => {
-      const p = enzymeWrapper.find("p");
-
-      expect(p).toHaveLength(4);
+    expect(screen.getByText("Coupons:")).toBeInTheDocument();
+    coupons.forEach((coupon) => {
+      expect(screen.getByText(new RegExp(`^${coupon.code} :`))).toBeInTheDocument();
     });
+  });
 
-    it("Should render the button remove coupon of CouponList", () => {
-      const button = enzymeWrapper.find("button");
+  it("Should render the button remove coupon of CouponList", () => {
+    setup();
 
-      expect(button).toHaveLength(3);
-    });
+    expect(screen.getAllByRole("button", { name: "X" })).toHaveLength(3);
   });
 });
