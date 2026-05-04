@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import ShoppingCartSummary from "../../components/ShoppingCartSummary";
 
 describe("ShoppingCartSummary Component", () => {
@@ -22,5 +22,22 @@ describe("ShoppingCartSummary Component", () => {
     render(<ShoppingCartSummary products={products} coupons={coupons} />);
 
     expect(screen.getByRole("button", { name: "Purchase" })).toBeInTheDocument();
+  });
+
+  it("Should show success overlay after clicking Purchase", () => {
+    render(<ShoppingCartSummary products={products} coupons={coupons} />);
+
+    fireEvent.click(screen.getByRole("button", { name: "Purchase" }));
+
+    expect(screen.getByRole("status")).toBeInTheDocument();
+    expect(screen.getByText("Order placed!")).toBeInTheDocument();
+  });
+
+  it("Should disable Purchase button while overlay is visible", () => {
+    render(<ShoppingCartSummary products={products} coupons={coupons} />);
+
+    fireEvent.click(screen.getByRole("button", { name: "Purchase" }));
+
+    expect(screen.getByRole("button", { name: /Placed!/ })).toBeDisabled();
   });
 });

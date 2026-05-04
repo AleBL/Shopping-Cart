@@ -383,6 +383,89 @@
   background: #f2fffd;
 }
 
+/* ── Purchase animation ───────────────────────── */
+
+.summary-panel {
+  position: relative;
+}
+
+.purchase-overlay {
+  position: absolute;
+  inset: -1rem;
+  border-radius: 18px;
+  background: rgba(255, 253, 245, 0.92);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  animation: overlay-in 0.3s ease-out;
+  overflow: hidden;
+}
+
+.purchase-success-content {
+  display: grid;
+  gap: 0.25rem;
+  text-align: center;
+  z-index: 1;
+}
+
+.purchase-checkmark {
+  font-size: 2.6rem;
+  line-height: 1;
+  color: var(--accent);
+  animation: check-pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.purchase-success-title {
+  margin: 0;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 1.35rem;
+  color: var(--text-main);
+}
+
+.purchase-success-sub {
+  margin: 0;
+  color: var(--text-soft);
+  font-size: 0.83rem;
+}
+
+.purchase-confetti {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -14px;
+  display: block;
+  animation: confetti-fall 1.4s ease-in forwards;
+  border-radius: 2px;
+}
+
+.btn-purchased {
+  opacity: 0.75;
+  cursor: default;
+}
+
+@keyframes overlay-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes check-pop {
+  0%   { transform: scale(0) rotate(-10deg); opacity: 0; }
+  70%  { transform: scale(1.2) rotate(4deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+@keyframes confetti-fall {
+  0%   { transform: translateY(0) rotate(0deg);    opacity: 1; }
+  80%  { opacity: 1; }
+  100% { transform: translateY(320px) rotate(720deg); opacity: 0; }
+}
+
 .btn {
   padding: 0.58rem 0.9rem;
   text-align: center;
