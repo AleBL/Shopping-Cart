@@ -1,0 +1,38 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Banana",
+      "price_per_kg": 10.0
+    },
+    {
+      "id": 2,
+      "name": "Apple",
+      "price_per_kg": 20.0
+    },
+    {
+      "id": 3,
+      "name": "Orange",
+      "price_per_kg": 30.0
+    }
+  ],
+  "coupons": [
+    {
+      "code": "A",
+      "type": "PERCENTUAL",
+      "value": 0.3,
+      "activation_value": 0
+    },
+    {
+      "code": "FOO",
+      "type": "FIXED",
+      "value": 100,
+      "activation_value": 0
+    },
+    {
+      "code": "C",
+      "type": "FREE-SHIPPING",
+      "activation_value": 300.5
+    }
+  ]
+}
